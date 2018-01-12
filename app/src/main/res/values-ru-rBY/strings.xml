@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyEconomizer</string>
+    <string name="add_text">Добавить</string>
+    <string name="Name_of_product">Наименование товара</string>
+    <string name="cost_of_product">Стоимость товара</string>
+    <string name="Volume_of_goods">Объём товара</string>
+    <string name="new_text">Новый элемент</string>
+</resources>
