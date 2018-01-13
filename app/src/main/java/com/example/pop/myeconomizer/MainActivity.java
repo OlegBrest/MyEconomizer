@@ -2,6 +2,7 @@ package com.example.pop.myeconomizer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -55,7 +56,6 @@ private ArrayList<goods_type> listOfGoods;
         gv = (GridView) findViewById(R.id.Goods_GridView);
         adapter = new GoodsListAdapter(getApplicationContext(), R.layout.list_items,listOfGoods);
         gv.setAdapter(adapter);
-
         newbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +72,17 @@ private ArrayList<goods_type> listOfGoods;
         gt.setName(data.getStringExtra("Name"));
         gt.setCost(data.getDoubleExtra("Cost",1));
         gt.setVolume(data.getDoubleExtra("Volume",1));
+
         listOfGoods.add (gt);
         adapter.notifyDataSetChanged();
+
+        int count = this.gv.getChildCount();
+        for (int i = 0; i < count; i++)
+        {
+            View cell = this.gv.getChildAt(i);
+            TextView cellText = (TextView) cell.findViewById(R.id.txt_name);
+            cellText.setTextColor(0);
+        }
 
     }
 }
