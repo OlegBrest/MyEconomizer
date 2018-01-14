@@ -54,7 +54,7 @@ private ArrayList<goods_type> listOfGoods;
         newbutton = (Button) findViewById(R.id.new_bttn);
         listOfGoods = new ArrayList<>();
         gv = (GridView) findViewById(R.id.Goods_GridView);
-        adapter = new GoodsListAdapter(getApplicationContext(), R.layout.list_items,listOfGoods);
+        adapter = new GoodsListAdapter(this, R.layout.list_items,listOfGoods);
         gv.setAdapter(adapter);
         newbutton.setOnClickListener(new View.OnClickListener() {
             @Override
