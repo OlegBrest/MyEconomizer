@@ -1,16 +1,12 @@
 package com.example.pop.myeconomizer;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,9 +23,9 @@ class goods_type
         this.Volume = 0.0;
     }
 
-    public String getName() {return Name;}
-    public double getCost() {return Cost;}
-    public double getVolume() {return Volume;}
+    public String getName() {return this.Name;}
+    public double getCost() {return this.Cost;}
+    public double getVolume() {return this.Volume;}
 
     public void setName (String name) {this.Name =name;}
     public void setCost (double cost) {this.Cost =cost;}
@@ -37,7 +33,6 @@ class goods_type
 }
 
 public class MainActivity extends AppCompatActivity {
-
 
 
 private Button newbutton = null;
@@ -51,8 +46,26 @@ private ArrayList<goods_type> listOfGoods;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.listOfGoods = new ArrayList<>();
+        if (savedInstanceState != null)
+        {
+
+            int count = savedInstanceState.getInt("Size");
+            goods_type gt2load = new goods_type();
+            String [] Name_load = new String[count];
+            double [] Cost_load = new double[count];
+            double [] Volume_load = new double[count];
+            Name_load = savedInstanceState.getStringArray("NameArray");
+            Cost_load = savedInstanceState.getDoubleArray("CostArray");
+            Volume_load = savedInstanceState.getDoubleArray("VolumeArray");
+            for (int i = 0; i < count ; i++) {
+                gt2load.setName(Name_load[i]);
+                gt2load.setCost(Cost_load[i]);
+                gt2load.setVolume(Volume_load[i]);
+                this.listOfGoods.add(gt2load);
+            }
+        }
         newbutton = (Button) findViewById(R.id.new_bttn);
-        listOfGoods = new ArrayList<>();
         gv = (GridView) findViewById(R.id.Goods_GridView);
         adapter = new GoodsListAdapter(this, R.layout.list_items,listOfGoods);
         gv.setAdapter(adapter);
@@ -73,16 +86,30 @@ private ArrayList<goods_type> listOfGoods;
         gt.setCost(data.getDoubleExtra("Cost",1));
         gt.setVolume(data.getDoubleExtra("Volume",1));
 
-        listOfGoods.add (gt);
+        this.listOfGoods.add (gt);
         adapter.notifyDataSetChanged();
-
-        int count = this.gv.getChildCount();
-        for (int i = 0; i < count; i++)
-        {
-            View cell = this.gv.getChildAt(i);
-            TextView cellText = (TextView) cell.findViewById(R.id.txt_name);
-            cellText.setTextColor(0);
-        }
-
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int count = this.listOfGoods.toArray().length;
+        String [] Name_save = new String[count];
+        double [] Cost_save = new double[count];
+        double [] Volume_save = new double[count];
+
+        for (int i = 0; i < count ; i++)
+        {
+            Name_save[i] = this.listOfGoods.get(i).getName();
+            Cost_save[i] = this.listOfGoods.get(i).getCost();
+            Volume_save[i] = this.listOfGoods.get(i).getVolume();
+        }
+        outState.putStringArray("NameArray",Name_save);
+        outState.putDoubleArray("CostArray",Cost_save);
+        outState.putDoubleArray("VolumeArray",Volume_save);
+        outState.putInt("Size",count);
+    }
+
+
+
 }
