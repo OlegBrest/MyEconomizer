@@ -5,4 +5,5 @@
     <string name="cost_of_product">Cost of goods</string>
     <string name="Volume_of_goods">Volume of goods</string>
     <string name="new_text">New element</string>
+    <string name="Cost_per_item">Cost per item</string>
 </resources>

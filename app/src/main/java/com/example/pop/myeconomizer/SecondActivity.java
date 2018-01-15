@@ -3,6 +3,7 @@ package com.example.pop.myeconomizer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ private Button addbutton = null;
                 finish();
             }
         });
+        Log.d("SecondActiv","onCreate");
     }
 
     @Override
