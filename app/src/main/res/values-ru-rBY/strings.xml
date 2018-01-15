@@ -6,4 +6,5 @@
     <string name="cost_of_product">Стоимость товара</string>
     <string name="Volume_of_goods">Объём товара</string>
     <string name="new_text">Новый элемент</string>
+    <string name="Cost_per_item">Стоимость еденицы</string>
 </resources>
