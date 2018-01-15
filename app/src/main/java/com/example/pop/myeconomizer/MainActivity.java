@@ -3,6 +3,7 @@ package com.example.pop.myeconomizer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,7 +52,7 @@ private ArrayList<goods_type> listOfGoods;
         {
 
             int count = savedInstanceState.getInt("Size");
-            goods_type gt2load = new goods_type();
+
             String [] Name_load = new String[count];
             double [] Cost_load = new double[count];
             double [] Volume_load = new double[count];
@@ -59,6 +60,7 @@ private ArrayList<goods_type> listOfGoods;
             Cost_load = savedInstanceState.getDoubleArray("CostArray");
             Volume_load = savedInstanceState.getDoubleArray("VolumeArray");
             for (int i = 0; i < count ; i++) {
+                goods_type gt2load = new goods_type();
                 gt2load.setName(Name_load[i]);
                 gt2load.setCost(Cost_load[i]);
                 gt2load.setVolume(Volume_load[i]);

@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:baselineAligned="false"
+            android:numeric="decimal"
             android:text="@string/cost_of_product"
             android:textColor="@android:color/black" />
 
@@ -45,6 +46,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:numeric="decimal"
             android:text="@string/Volume_of_goods"
             android:textColor="@android:color/black" />
 
