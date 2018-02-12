@@ -23,7 +23,7 @@
         tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/txt_name"
+            android:id="@+id/head_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -32,7 +32,7 @@
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/txt_cost"
+            android:id="@+id/head_cost"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,7 +41,7 @@
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/txt_volume"
+            android:id="@+id/head_volume"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,13 +49,11 @@
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/txt_per_item"
+            android:id="@+id/head_per_item"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/Cost_per_item"
             android:textColor="@android:color/black" />
     </TableRow>
-
-
 </TableLayout>

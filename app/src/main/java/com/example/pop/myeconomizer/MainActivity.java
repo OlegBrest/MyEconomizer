@@ -1,13 +1,16 @@
 package com.example.pop.myeconomizer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,27 +20,28 @@ class goods_type
     private double Cost;
     private double Volume;
 
-    public goods_type()
+    goods_type()
     {
         this.Name = "";
         this.Cost = 0.0;
         this.Volume = 0.0;
     }
 
-    public String getName() {return this.Name;}
-    public double getCost() {return this.Cost;}
-    public double getVolume() {return this.Volume;}
+    String getName() {return this.Name;}
+    double getCost() {return this.Cost;}
+    double getVolume() {return this.Volume;}
 
-    public void setName (String name) {this.Name =name;}
-    public void setCost (double cost) {this.Cost =cost;}
-    public void setVolume (double volume) {this.Volume = volume;}
+    void setName (String name) {this.Name =name;}
+    void setCost (double cost) {this.Cost =cost;}
+    void setVolume (double volume) {this.Volume = volume;}
 }
 
 public class MainActivity extends AppCompatActivity {
 
 
 private Button newbutton = null;
-private GridView gv = null;
+private ListView lv = null;
+
 
 private ArrayAdapter<goods_type> adapter;
 private ArrayList<goods_type> goods;
@@ -48,29 +52,33 @@ private ArrayList<goods_type> listOfGoods;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.listOfGoods = new ArrayList<>();
+
+
         if (savedInstanceState != null)
         {
 
             int count = savedInstanceState.getInt("Size");
 
-            String [] Name_load = new String[count];
-            double [] Cost_load = new double[count];
-            double [] Volume_load = new double[count];
+            String [] Name_load ;
+            double [] Cost_load ;
+            double [] Volume_load ;
             Name_load = savedInstanceState.getStringArray("NameArray");
             Cost_load = savedInstanceState.getDoubleArray("CostArray");
             Volume_load = savedInstanceState.getDoubleArray("VolumeArray");
             for (int i = 0; i < count ; i++) {
                 goods_type gt2load = new goods_type();
-                gt2load.setName(Name_load[i]);
-                gt2load.setCost(Cost_load[i]);
-                gt2load.setVolume(Volume_load[i]);
+                gt2load.setName(Name_load != null ? Name_load[i] : null);
+                gt2load.setCost(Cost_load != null ? Cost_load[i] : 0);
+                gt2load.setVolume(Volume_load != null ? Volume_load[i] : 0);
                 this.listOfGoods.add(gt2load);
             }
         }
-        newbutton = (Button) findViewById(R.id.new_bttn);
-        gv = (GridView) findViewById(R.id.Goods_GridView);
+        newbutton = findViewById(R.id.new_bttn);
+        this.lv = findViewById(R.id.listview_goods);
+        @SuppressLint("InflateParams") View viewHeader = getLayoutInflater().inflate(R.layout.header,null);
+        this.lv.addHeaderView(viewHeader);
         adapter = new GoodsListAdapter(this, R.layout.list_items,listOfGoods);
-        gv.setAdapter(adapter);
+        this.lv.setAdapter(adapter);
         newbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +119,4 @@ private ArrayList<goods_type> listOfGoods;
         outState.putDoubleArray("VolumeArray",Volume_save);
         outState.putInt("Size",count);
     }
-
-
-
 }
