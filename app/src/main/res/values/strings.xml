@@ -6,4 +6,9 @@
     <string name="Volume_of_goods">Volume of goods</string>
     <string name="new_text">New element</string>
     <string name="Cost_per_item">Cost per item</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_save">Save table</string>
+    <string name="menu_load">Load table</string>
+    <string name="menu_save_edit">Edit saves</string>
+    <string name="Menu_clear">Clear table</string>
 </resources>

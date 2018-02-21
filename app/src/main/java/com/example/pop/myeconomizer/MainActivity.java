@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 class goods_type
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 private Button newbutton = null;
 private ListView lv = null;
-
+private DBHelper dbHelper;
 
 private ArrayAdapter<goods_type> adapter;
 private ArrayList<goods_type> goods;
@@ -52,7 +51,6 @@ private ArrayList<goods_type> listOfGoods;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.listOfGoods = new ArrayList<>();
-
 
         if (savedInstanceState != null)
         {
@@ -86,6 +84,7 @@ private ArrayList<goods_type> listOfGoods;
                 startActivityForResult(intent,1);
             }
         });
+        dbHelper = new DBHelper(this);
     }
     @Override
     protected void onActivityResult (int requestCode, int resultCode , Intent data)
@@ -119,4 +118,23 @@ private ArrayList<goods_type> listOfGoods;
         outState.putDoubleArray("VolumeArray",Volume_save);
         outState.putInt("Size",count);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_clear)
+        {
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+

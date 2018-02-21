@@ -7,4 +7,9 @@
     <string name="Volume_of_goods">Объём товара</string>
     <string name="new_text">Новый элемент</string>
     <string name="Cost_per_item">Стоимость единицы</string>
+    <string name="action_settings">Настройки</string>
+    <string name="menu_save">Сохранить таблицу</string>
+    <string name="menu_load">Загрузить таблицу</string>
+    <string name="menu_save_edit">Редактровать сохранения</string>
+    <string name="Menu_clear">Очистить таблицу</string>
 </resources>
