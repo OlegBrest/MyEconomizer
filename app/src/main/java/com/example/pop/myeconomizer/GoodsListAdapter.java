@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,11 @@ public class GoodsListAdapter extends ArrayAdapter<goods_type>
     GoodsListAdapter(Context context, int resource, ArrayList<goods_type> objects)
     {
         super(context, resource,objects);
-        listOfGoods = objects;
+        this.listOfGoods = objects;
     }
 
     @Override
-    public int getCount(){return  listOfGoods.size();}
+    public int getCount(){return  this.listOfGoods.size();}
 
     @SuppressLint("InflateParams")
     @NonNull
@@ -37,8 +38,7 @@ public class GoodsListAdapter extends ArrayAdapter<goods_type>
         TextView textCost = convertView.findViewById(R.id.txt_cost);
         TextView textVolume = convertView.findViewById(R.id.txt_volume);
         TextView textPPI = convertView.findViewById(R.id.txt_per_item);
-
-        goods_type item_good = listOfGoods.get(position);
+        goods_type item_good = this.listOfGoods.get(position);
         textName.setText(item_good.getName());
         textCost.setText(new DecimalFormat("#.#####").format(item_good.getCost()));
         textVolume.setText(new DecimalFormat("#.#####").format(item_good.getVolume()));

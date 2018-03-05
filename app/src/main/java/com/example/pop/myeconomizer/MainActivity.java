@@ -43,7 +43,6 @@ private ListView lv = null;
 private DBHelper dbHelper;
 
 private ArrayAdapter<goods_type> adapter;
-private ArrayList<goods_type> goods;
 private ArrayList<goods_type> listOfGoods;
 
     @Override
@@ -71,13 +70,13 @@ private ArrayList<goods_type> listOfGoods;
                 this.listOfGoods.add(gt2load);
             }
         }
-        newbutton = findViewById(R.id.new_bttn);
+        this.newbutton = findViewById(R.id.new_bttn);
         this.lv = findViewById(R.id.listview_goods);
         @SuppressLint("InflateParams") View viewHeader = getLayoutInflater().inflate(R.layout.header,null);
         this.lv.addHeaderView(viewHeader);
-        adapter = new GoodsListAdapter(this, R.layout.list_items,listOfGoods);
-        this.lv.setAdapter(adapter);
-        newbutton.setOnClickListener(new View.OnClickListener() {
+        this.adapter = new GoodsListAdapter(this, R.layout.list_items,this.listOfGoods);
+        this.lv.setAdapter(this.adapter);
+        this.newbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(getApplicationContext(),SecondActivity.class);
@@ -94,19 +93,17 @@ private ArrayList<goods_type> listOfGoods;
         gt.setName(data.getStringExtra("Name"));
         gt.setCost(data.getDoubleExtra("Cost",1));
         gt.setVolume(data.getDoubleExtra("Volume",1));
-
         this.listOfGoods.add (gt);
-        adapter.notifyDataSetChanged();
+        this.adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        int count = this.listOfGoods.toArray().length;
+        int count = this.listOfGoods.size();
         String [] Name_save = new String[count];
         double [] Cost_save = new double[count];
         double [] Volume_save = new double[count];
-
         for (int i = 0; i < count ; i++)
         {
             Name_save[i] = this.listOfGoods.get(i).getName();
@@ -132,6 +129,8 @@ private ArrayList<goods_type> listOfGoods;
 
         if (id == R.id.menu_clear)
         {
+            this.listOfGoods.clear();
+            this.adapter.notifyDataSetChanged();
         }
 
         return super.onOptionsItemSelected(item);
