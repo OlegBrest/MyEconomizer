@@ -11,4 +11,6 @@
     <string name="menu_load">Load table</string>
     <string name="menu_save_edit">Edit saves</string>
     <string name="Menu_clear">Clear table</string>
+    <string name="shop">Shop</string>
+    <string name="edit">Edit</string>
 </resources>

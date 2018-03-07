@@ -35,11 +35,13 @@ public class GoodsListAdapter extends ArrayAdapter<goods_type>
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_items, null);
         TextView textName = convertView.findViewById(R.id.txt_name);
+        TextView textShop = convertView.findViewById(R.id.txt_shop);
         TextView textCost = convertView.findViewById(R.id.txt_cost);
         TextView textVolume = convertView.findViewById(R.id.txt_volume);
         TextView textPPI = convertView.findViewById(R.id.txt_per_item);
         goods_type item_good = this.listOfGoods.get(position);
         textName.setText(item_good.getName());
+        textShop.setText(item_good.getShop());
         textCost.setText(new DecimalFormat("#.#####").format(item_good.getCost()));
         textVolume.setText(new DecimalFormat("#.#####").format(item_good.getVolume()));
         textPPI.setText(new DecimalFormat("#.#####").format(item_good.getCost()/item_good.getVolume()));

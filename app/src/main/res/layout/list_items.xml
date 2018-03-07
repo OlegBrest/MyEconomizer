@@ -23,6 +23,15 @@
         tools:ignore="UselessParent">
 
         <TextView
+            android:id="@+id/txt_shop"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:text="@string/shop"
+            android:textColor="@android:color/black" />
+
+        <TextView
             android:id="@+id/txt_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
