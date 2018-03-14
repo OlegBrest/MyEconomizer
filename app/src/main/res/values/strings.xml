@@ -13,4 +13,6 @@
     <string name="Menu_clear">Clear table</string>
     <string name="shop">Shop</string>
     <string name="edit">Edit</string>
+    <string name="ok">OK</string>
+    <string name="save_name">Name to save</string>
 </resources>

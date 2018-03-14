@@ -44,7 +44,7 @@ public class GoodsListAdapter extends ArrayAdapter<goods_type>
         textShop.setText(item_good.getShop());
         textCost.setText(new DecimalFormat("#.#####").format(item_good.getCost()));
         textVolume.setText(new DecimalFormat("#.#####").format(item_good.getVolume()));
-        textPPI.setText(new DecimalFormat("#.#####").format(item_good.getCost()/item_good.getVolume()));
+        textPPI.setText(new DecimalFormat("#.#####").format(item_good.getPPI()));
         return convertView;
     }
 }

@@ -20,7 +20,7 @@ private int position = -1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        addbutton =  findViewById(R.id.ok_bttn);
+        this.addbutton =  findViewById(R.id.ok_bttn);
         Name_txt = findViewById(R.id.txtbx_name);
         Shop_txt =  findViewById(R.id.txtbx_shop);
         Cost_txt =  findViewById(R.id.txtbx_cost);
@@ -35,7 +35,7 @@ private int position = -1;
             Volume_txt.setText(String.valueOf(intent.getDoubleExtra("Volume",1)));
             addbutton.setText(R.string.edit);
         }
-        addbutton.setOnClickListener (new View.OnClickListener() {
+        this.addbutton.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent data = new Intent();
@@ -43,6 +43,7 @@ private int position = -1;
                 data.putExtra("Shop",Shop_txt.getText().toString());
                 data.putExtra("Cost",Double.parseDouble(Cost_txt.getText().toString()));
                 data.putExtra("Volume",Double.parseDouble(Volume_txt.getText().toString()));
+                data.putExtra("state","edit_add");
                 if (position!=-1) data.putExtra("Position", position);
                 setResult(RESULT_OK,data);
                 finish();

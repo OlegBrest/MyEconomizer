@@ -14,4 +14,6 @@
     <string name="menu_save">Сохранить таблицу</string>
     <string name="shop">Магазин</string>
     <string name="edit">Редактировать</string>
+    <string name="ok">OK</string>
+    <string name="save_name">Сохранить под именем</string>
 </resources>
