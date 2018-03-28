@@ -18,6 +18,7 @@
     android:layout_gravity="start">
 
     <TableRow
+        android:id="@+id/header_tabrow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="UselessParent">
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:baselineAligned="false"
+            android:onClick="onClick"
             android:text="@string/shop"
             android:textColor="@android:color/black" />
 
@@ -37,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:baselineAligned="false"
+            android:onClick="onClick"
             android:text="@string/Name_of_product"
             android:textColor="@android:color/black" />
 
@@ -46,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:baselineAligned="false"
+            android:onClick="onClick"
             android:text="@string/cost_of_product"
             android:textColor="@android:color/black" />
 
@@ -54,6 +58,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClick"
             android:text="@string/Volume_of_goods"
             android:textColor="@android:color/black" />
 
@@ -62,6 +67,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClick"
             android:text="@string/Cost_per_item"
             android:textColor="@android:color/black" />
     </TableRow>

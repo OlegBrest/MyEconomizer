@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -24,7 +27,7 @@ public class saves_activity extends AppCompatActivity implements View.OnClickLis
     private DBHelper dbHelper;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> saves;
-
+    private TableRow tabrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class saves_activity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.saves_layout);
         this.saves = new ArrayList<>();
         this.saves_lv = findViewById(R.id.saves_names_listview);
+        this.tabrow = findViewById(R.id.header_tabrow);
         this.saves_lv.setMenuCreator(creator);
         this.adapter = new saves_adapter(this, R.layout.list_saves, this.saves);
         this.saves_lv.setAdapter(this.adapter);
@@ -69,7 +73,7 @@ public class saves_activity extends AppCompatActivity implements View.OnClickLis
                         // delete
                         String str_to_delete= "" + saves_lv.getItemAtPosition(position);
                         database = dbHelper.getWritableDatabase();
-                        dbHelper.DeleteSave(database,str_to_delete);
+                        dbHelper.DeleteSave(database,str_to_delete,true);
                         saves.remove(position);
                         adapter.notifyDataSetChanged();
                         break;
@@ -121,7 +125,7 @@ public class saves_activity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v)
     {
-
+       Log.d("135","Saves on click header") ;
     }
 }
 

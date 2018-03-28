@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -23,6 +21,9 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 class goods_type
 {
     private String Name;
@@ -30,6 +31,7 @@ class goods_type
     private double Cost;
     private double Volume;
     private double PPI;
+    private static boolean inverse = false;
 
     goods_type()
     {
@@ -51,6 +53,145 @@ class goods_type
     void setCost (double cost) {this.Cost =cost;}
     void setVolume (double volume) {this.Volume = volume;}
     void setPPI (double ppi) {this.PPI = ppi;}
+
+    public static ArrayList<goods_type> sortListBy(ArrayList<goods_type> list, By by) {
+        switch (by) {
+            case PPI:
+                Collections.sort(list, byPPI);
+                break;
+            case PRICE:
+                Collections.sort(list, byPrice);
+                break;
+            case VOLUME:
+                Collections.sort(list, byVolume);
+                break;
+            case NAME:
+                Collections.sort(list, byName);
+                break;
+            case SHOP:
+                Collections.sort(list, byShop);
+                break;
+            default:
+                break;
+        }
+        return list;
+    }
+
+    private static final Comparator<goods_type> byPPI= new Comparator<goods_type>() {
+        @Override
+        public int compare(goods_type t1, goods_type t2) {
+            double p1 = t1.getPPI();
+            double p2 = t2.getPPI();
+            if (!inverse) return Double.compare(p1,p2);
+            else return Double.compare(p2,p1);
+        }
+    };
+
+    private static final Comparator<goods_type> byPrice= new Comparator<goods_type>() {
+        @Override
+        public int compare(goods_type t1, goods_type t2) {
+            double p1 = t1.getCost();
+            double p2 = t2.getCost();
+            if (!inverse) return Double.compare(p1,p2);
+            else return Double.compare(p2,p1);
+        }
+    };
+    private static final Comparator<goods_type> byVolume= new Comparator<goods_type>() {
+        @Override
+        public int compare(goods_type t1, goods_type t2) {
+            double p1 = t1.getVolume();
+            double p2 = t2.getVolume();
+            if (!inverse) return Double.compare(p1,p2);
+            else return Double.compare(p2,p1);
+        }
+    };
+    private static final Comparator<goods_type> byName= new Comparator<goods_type>() {
+        @Override
+        public int compare(goods_type t1, goods_type t2) {
+            String s1 = t1.getName();
+            String s2 = t2.getName();
+            char [] p1;
+            char [] p2;
+            p1 = new  char[s1.length()];
+            p2 = new char[s2.length()];
+            t1.getName().getChars(0,s1.length(),p1,0);
+            t2.getName().getChars(0,s2.length(),p2,0);
+            if (inverse) {
+                p1 = new  char[s2.length()];
+                p2 = new char[s1.length()];
+                t1.getName().getChars(0,s1.length(),p2,0);
+                t2.getName().getChars(0,s2.length(),p1,0);
+            }
+            int str_lenght = Math.min(p1.length,p2.length);
+            int result = 0;
+            for (int i = 0 ; i < str_lenght; i++ )
+            {
+               if (p1[i]>p2[i])
+            {
+                result = 1;
+                break;
+            }
+                if (p1[i]<p2[i])
+                {
+                    result = -1;
+                    break;
+                }
+            }
+            return result;
+        }
+    };
+
+    private static final Comparator<goods_type> byShop= new Comparator<goods_type>() {
+        @Override
+        public int compare(goods_type t1, goods_type t2) {
+            String s1 = t1.getShop();
+            String s2 = t2.getShop();
+            char [] p1;
+            char [] p2;
+            p1 = new  char[s1.length()];
+            p2 = new char[s2.length()];
+            t1.getName().getChars(0,s1.length(),p1,0);
+            t2.getName().getChars(0,s2.length(),p2,0);
+            if (inverse) {
+                p1 = new  char[s2.length()];
+                p2 = new char[s1.length()];
+                t1.getName().getChars(0,s1.length(),p2,0);
+                t2.getName().getChars(0,s2.length(),p1,0);
+            }
+            int str_lenght = Math.min(p1.length,p2.length);
+            int result = 0;
+            for (int i = 0 ; i < str_lenght; i++ )
+            {
+                if (p1[i]>p2[i])
+                {
+                    result = 1;
+                    break;
+                }
+                if (p1[i]<p2[i])
+                {
+                    result = -1;
+                    break;
+                }
+            }
+            return result;
+        }
+    };
+
+    public static void  reverse()
+    {
+        inverse=!inverse;
+    }
+
+    public enum By {
+        PPI,
+        PRICE,
+        VOLUME,
+        NAME,
+        SHOP
+    }
+
+
+
 }
 
 public class MainActivity extends AppCompatActivity {
@@ -66,6 +207,7 @@ private Button cancel_save_bttn = null;
 
 private ArrayAdapter<goods_type> adapter;
 private ArrayList<goods_type> listOfGoods;
+private int last_sorted = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -308,6 +450,31 @@ private ArrayList<goods_type> listOfGoods;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View v)
+    {
+        if (v.getId() == this.last_sorted)
+        {
+            goods_type.reverse();
+        }
+        if (v.getId() == R.id.head_cost) {
+            goods_type.sortListBy(this.listOfGoods, goods_type.By.PRICE);
+        }
+        if (v.getId() == R.id.head_name) {
+            goods_type.sortListBy(this.listOfGoods, goods_type.By.NAME);
+        }
+        if (v.getId() == R.id.head_per_item) {
+            goods_type.sortListBy(this.listOfGoods, goods_type.By.PPI);
+        }
+        if (v.getId() == R.id.head_shop) {
+            goods_type.sortListBy(this.listOfGoods, goods_type.By.SHOP);
+        }
+        if (v.getId() == R.id.head_volume) {
+            goods_type.sortListBy(this.listOfGoods, goods_type.By.VOLUME);
+        }
+        this.last_sorted = v.getId();
+        this.adapter.notifyDataSetChanged();
     }
 }
 

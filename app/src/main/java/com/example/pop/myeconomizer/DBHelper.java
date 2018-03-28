@@ -46,7 +46,7 @@ public class DBHelper  extends SQLiteOpenHelper{
     public void SaveArrLst (SQLiteDatabase db,String Save_Name,ArrayList <goods_type> alist)
     {
         int count = alist.size();
-        this.DeleteSave(db,Save_Name);
+        this.DeleteSave(db,Save_Name, false);
         if (!db.isOpen()) db.beginTransaction();
         for (int i = 0; i < count ; i++)
         {
@@ -64,11 +64,11 @@ public class DBHelper  extends SQLiteOpenHelper{
         db.close();
     }
 
-    public void DeleteSave(SQLiteDatabase db,String Save_Name)
+    public void DeleteSave(SQLiteDatabase db,String Save_Name, boolean closeit )
     {
         if (!db.isOpen()) db.beginTransaction();
         db.execSQL("delete from " + TABLE_ECONOMIZER + " where " + KEY_SAVE_NAME + "='"+Save_Name+"'");
-        db.close();
+        if (closeit)db.close();
     }
 
     public void LoadArrLst (SQLiteDatabase db,String Save_Name,ArrayList <goods_type> alist)
